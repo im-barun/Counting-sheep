@@ -1,0 +1,80 @@
+# Counting-sheep
+Google programming challenge problem
+
+
+import java.util.*;
+import java.io.*;
+
+public class Countingsheep {
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader br = null;
+		try{
+			br = new BufferedReader(new FileReader("C:\\Users\\bkumar68\\Desktop\\y.txt"));
+			PrintStream console = System.out;
+			//C:\Users\bkumar68\Desktop
+			File file = new File("C:\\Users\\bkumar68\\Desktop\\z.txt");
+			FileOutputStream fos = new FileOutputStream(file);
+			PrintStream ps = new PrintStream(fos);
+			System.setOut(ps);
+		//Scanner sc=new Scanner(System.in);
+		int t=Integer.parseInt(br.readLine());
+		int number;
+		String result="";
+		for(int i=1;i<=t;i++)
+		{
+			//do for long datatype
+			number=Integer.parseInt(br.readLine());
+			boolean a=true;
+			boolean[] A=new boolean[10];
+			int [] B={0,1,2,3,4,5,6,7,8,9};
+			long j=1;
+			int count=0;
+			
+			if(number == 0){
+				System.out.println("Case #"+i+": INSOMNIA");}
+			else{
+			while(a)
+			{
+				//number=number*j; check here if number becomes long
+				String s=String.valueOf(number*j);
+				for(int k=0;k<10;k++){
+					//System.out.println(s.indexOf(B[k])+" "+B[k]);  
+					if(!A[k] && s.indexOf(Integer.toString(B[k]).charAt(0))!=-1)
+					{
+						A[k]=true;
+						count++;
+						if(count==10)
+						{
+							a=false;
+							//result=Long.toString(number);
+							result=s;
+							break;
+							
+						}
+					}
+				}
+				j++;
+			}
+			System.out.println("Case #"+i+": "+result);
+		}
+		}
+
+		
+		
+		}catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (br != null)br.close();
+			} catch (IOException ex) {
+				ex.printStackTrace();
+			}
+		}
+	}
+
+}
